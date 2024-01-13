@@ -14,6 +14,7 @@ const CarriersList: FC<Props> = ({ carriers, onChange, carriers_uids }) => {
     <Flex direction="column">
       {carriers &&
         carriers.map((carrier) => {
+          const checked = !!carriers_uids.find((uid) => carrier.uid === uid);
           return (
             <Flex key={carrier.uid}>
               <input
@@ -26,6 +27,7 @@ const CarriersList: FC<Props> = ({ carriers, onChange, carriers_uids }) => {
                     );
                   }
                 }}
+                checked={checked}
                 type="checkbox"
               />
               <label>

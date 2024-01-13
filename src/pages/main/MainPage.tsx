@@ -73,7 +73,7 @@ const MainPage: FC = () => {
         <CarriersList
           carriers={carriers}
           carriers_uids={filters.carriers_uids}
-          onChange={onFilterChange("carriers_uds")}
+          onChange={onFilterChange("carriers_uids")}
         />
       </Flex>
       <FlightsList

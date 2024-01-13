@@ -1,20 +1,7 @@
 import styled from "styled-components";
 import SpinIcon from "./SpinIcon";
 
-const Spinner = () => (
-  <StyledSpinner>
-    <circle
-      className="path"
-      cx="25"
-      cy="25"
-      r="20"
-      fill="none"
-      strokeWidth="4"
-    />
-  </StyledSpinner>
-);
-
-const StyledSpinner = styled(SpinIcon)`
+const Spinner = styled(SpinIcon)`
   animation: rotate 2s linear infinite;
   width: 50px;
   height: 50px;

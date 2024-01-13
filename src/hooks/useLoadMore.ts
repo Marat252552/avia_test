@@ -1,6 +1,9 @@
 import { useCallbackOnce } from "./useCallbackOnce";
-import { PaginationQueryParams } from "../types/common";
 import { useState } from "react";
+
+export interface PaginationQueryParams {
+  limit: number;
+}
 
 type useLoadMoreType = (
   limit?: number,
