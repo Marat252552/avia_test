@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import Flex from "../../components/Flex";
 import useFetchData from "../../hooks/useFetchData";
 import useLoadMore from "../../hooks/useLoadMore";
@@ -28,7 +28,7 @@ const InitialFilters: FiltersQuery = {
   carriers_uids: [],
 };
 
-const MainPage = () => {
+const MainPage: FC = () => {
   const [filters, setFilters] = useState<FiltersQuery>(InitialFilters);
   const debouncedFilters = useDebounce(filters, 600);
   const { onLoadMoreClick, paginationQuery } = useLoadMore();

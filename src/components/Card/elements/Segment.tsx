@@ -31,15 +31,20 @@ const Segment: FC<SegmentProps> = ({
 }) => {
   return (
     <Flex direction="column">
-      <div>
-        {departureCity?.caption}, {departureAirport?.caption},{" "}
-        {departureAirport?.uid} ➝ {arrivalCity?.caption},{" "}
-        {arrivalAirport?.caption}
-      </div>
       <Flex justify="space-between">
-        <div>{getDepartureDate(departureDate)}</div>
-        <div>{getDuration(travelDuration)}</div>
-        <div>{getArrivalDate(arrivalDate)}</div>
+        <Flex>
+          {departureCity?.caption}, {departureAirport?.caption},{" "}
+          {departureAirport?.uid}
+        </Flex>
+        ➝
+        <Flex>
+          {arrivalCity?.caption}, {arrivalAirport?.caption}
+        </Flex>
+      </Flex>
+      <Flex justify="space-between">
+        <Text>{getDepartureDate(departureDate)}</Text>
+        <Text>{getDuration(travelDuration)}</Text>
+        <Text>{getArrivalDate(arrivalDate)}</Text>
       </Flex>
       <Text>Рейс выполняет: {airline.caption}</Text>
     </Flex>

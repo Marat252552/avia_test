@@ -1,5 +1,6 @@
 import { FC, memo, useMemo } from "react";
 import Flex from "../../../components/Flex";
+import Text from "../../../components/Text";
 
 interface Props {
   onFilterChange: (
@@ -15,7 +16,9 @@ const MaxPriceInput: FC<Props> = memo(({ value, onFilterChange }) => {
   );
   return (
     <Flex gap="5px">
-      <label>До</label>
+      <label>
+        <Text size="15px">До</Text>
+      </label>
       <input value={value} onChange={(e) => onChange(e.target.value)} />
     </Flex>
   );
