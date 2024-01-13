@@ -20,7 +20,7 @@ const Card: FC<CardProps> = ({ flight }) => {
       {segments && (
         <Flex direction="column" gap="20px">
           {segments.map((segment) => {
-            return <Segment {...segment} />;
+            return <Segment key={segment.departureDate} {...segment} />;
           })}
         </Flex>
       )}

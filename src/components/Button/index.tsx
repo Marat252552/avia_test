@@ -4,14 +4,14 @@ import styled from "styled-components";
 const StyledButton = styled.button<{
   background?: string;
   color?: string;
-  borderColor?: string;
+  border: string;
 }>(
-  ({ background = "#ff8c00", color = "white", borderColor = background }) => `
+  ({ background = "#ff8c00", color = "white", border }) => `
     padding: 10px;
     background: ${background};
     border-radius: 10px;
     color: ${color};
-    border: solid 2px ${borderColor};
+    border: ${border};
     &:hover {
       border: solid 2px black;
     }
@@ -26,8 +26,13 @@ interface ButtonProps {
   borderColor?: string;
 }
 
-const Button: FC<ButtonProps> = ({ children, ...props }) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const Button: FC<ButtonProps> = ({ children, borderColor, ...props }) => {
+  const border = `solid 2px ${borderColor ? borderColor : props.background}`;
+  return (
+    <StyledButton border={border} {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

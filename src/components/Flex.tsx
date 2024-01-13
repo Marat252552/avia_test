@@ -1,6 +1,7 @@
+import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-export interface FlexProps {
+export interface RawFlexProps {
   direction?: string;
   wrap?: string;
   align?: string;
@@ -10,11 +11,15 @@ export interface FlexProps {
   grow?: string;
   shrink?: string;
   basis?: string;
-  fullwidth?: boolean;
   width?: string;
 }
 
-const Flex = styled.div<FlexProps>(
+export interface FlexProps extends RawFlexProps {
+  fullwidth?: boolean;
+  children?: ReactNode;
+}
+
+const RawFlex = styled.div<FlexProps>(
   ({
     direction,
     wrap,
@@ -25,7 +30,6 @@ const Flex = styled.div<FlexProps>(
     grow,
     shrink,
     basis,
-    fullwidth,
     width,
   }) => `
   display: flex;
@@ -37,7 +41,7 @@ const Flex = styled.div<FlexProps>(
   ${flex ? `flex: ${flex};` : ""}
   ${grow ? `flex-grow: ${grow};` : ""}
   ${shrink ? `flex-shrink: ${shrink};` : ""}
-  ${fullwidth || width ? `width: ${width ? width : "100%"};` : ""}
+  ${width ? `width: ${width};` : ""}
   
   & > * {
     ${basis && `flex-basis: calc(${basis} - ${gap || "0px"}/2)`}
@@ -45,5 +49,14 @@ const Flex = styled.div<FlexProps>(
  
 `
 );
+
+const Flex: FC<FlexProps> = ({ fullwidth, width, ...props }) => {
+  return (
+    <RawFlex
+      width={width ? width : fullwidth ? "100%" : undefined}
+      {...props}
+    />
+  );
+};
 
 export default Flex;
