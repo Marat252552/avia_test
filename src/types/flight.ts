@@ -3,6 +3,12 @@ export interface FlightElement {
   caption: string;
 }
 
+export interface Carrier {
+  uid: string;
+  caption: string;
+  airlineCode: string;
+}
+
 interface Segment {
   classOfServiceCode: string;
   classOfService: FlightElement;
@@ -23,11 +29,7 @@ export interface Flight {
   flightToken: string;
   hasExtendedFare: boolean;
   flight: {
-    carrier: {
-      uid: string;
-      caption: string;
-      airlineCode: string;
-    };
+    carrier: Carrier;
     price: {
       total: {
         amount: string;

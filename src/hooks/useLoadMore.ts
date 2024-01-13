@@ -10,16 +10,12 @@ type useLoadMoreType = (
   onLoadMoreClick: () => void;
 };
 
-const useLoadMore: useLoadMoreType = (limit = 4, offset = 0) => {
+const useLoadMore: useLoadMoreType = (limit = 4) => {
   const [paginationQuery, setPaginationQuery] = useState<PaginationQueryParams>(
-    {
-      limit,
-      offset,
-    }
+    { limit }
   );
   const onLoadMoreClick = useCallbackOnce(() =>
     setPaginationQuery((prevState) => ({
-      ...prevState,
       limit: prevState.limit + 4,
     }))
   );
