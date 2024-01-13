@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Flex from "../../components/Flex";
 import useFetchData from "../../hooks/useFetchData";
 import useLoadMore from "../../hooks/useLoadMore";
-import getFlights from "../../utils/getFlights";
 import { useDebounce } from "../../hooks/useDebounce";
 import requestCarriers from "../../fakeApi/requestCarriers";
 import PriceSorter from "./elements/PriceSorter";
@@ -12,7 +11,6 @@ import TransferInput from "./elements/TransferInput";
 import CarriersList from "./elements/CarriersList";
 import FlightsList from "./elements/FlightsList";
 import requestFlights from "../../fakeApi/requestFlights";
-import Flight from "../../types/flight";
 
 export interface FiltersQuery {
   minimum_price: number;
@@ -33,25 +31,15 @@ const InitialFilters: FiltersQuery = {
 const MainPage = () => {
   const [filters, setFilters] = useState<FiltersQuery>(InitialFilters);
   const debouncedFilters = useDebounce(filters, 600);
-  const [flights, setFlights] = useState<null | Flight[]>(null);
   const { onLoadMoreClick, paginationQuery } = useLoadMore();
-  useEffect(() => {
-    (async () => {
-      const flights = await requestFlights({
-        ...debouncedFilters,
-        ...paginationQuery,
-      });
-      console.log("setFlights");
-      setFlights(flights);
-    })();
-  }, [paginationQuery, debouncedFilters]);
 
-  // const [flights] = useFetchData(requestFlights, null, {
-  //   ...paginationQuery,
-  //   ...debouncedFilters,
-  // });
+  const queries = useMemo(() => {
+    return { ...debouncedFilters, ...paginationQuery };
+  }, [debouncedFilters, paginationQuery]);
 
-  const [carriers, loading] = useFetchData(requestCarriers, null);
+  const [flights, loading] = useFetchData(requestFlights, null, queries);
+
+  const [carriers] = useFetchData(requestCarriers, null, filters.transfer);
   const onFilterChange = useCallback(
     (name: string) => (value: string | number | boolean | string[] | null) => {
       setFilters((prevState) => ({
@@ -65,27 +53,27 @@ const MainPage = () => {
   return (
     <Flex gap="30px">
       <Flex direction="column" gap="10px">
-        <PriceSorter onChange={onFilterChange("price_sort")} />
+        <PriceSorter onFilterChange={onFilterChange} />
 
         <MinPriceInput
           value={filters.minimum_price}
-          onChange={onFilterChange("minimum_price")}
+          onFilterChange={onFilterChange}
         />
 
         <MaxPriceInput
           value={filters.maximum_price}
-          onChange={onFilterChange("maximum_price")}
+          onFilterChange={onFilterChange}
         />
 
         <TransferInput
           checked={filters.transfer}
-          onClick={onFilterChange("transfer")}
+          onFilterChange={onFilterChange}
         />
 
         <CarriersList
           carriers={carriers}
           carriers_uids={filters.carriers_uids}
-          onChange={onFilterChange("carriers_uids")}
+          onChange={onFilterChange("carriers_uds")}
         />
       </Flex>
 

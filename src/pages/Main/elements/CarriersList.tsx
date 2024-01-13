@@ -14,14 +14,14 @@ const CarriersList: FC<Props> = ({ carriers, onChange, carriers_uids }) => {
       {carriers &&
         carriers.map((carrier) => {
           return (
-            <Flex>
+            <Flex key={carrier.uid}>
               <input
                 onChange={(e) => {
                   if (e.target.checked) {
                     onChange([...carriers_uids, carrier.uid]);
                   } else {
                     onChange(
-                      carriers_uids.filter((uid) => carrier.uid === uid)
+                      carriers_uids.filter((uid) => carrier.uid !== uid)
                     );
                   }
                 }}

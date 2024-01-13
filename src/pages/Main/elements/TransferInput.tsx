@@ -1,22 +1,25 @@
-import { FC } from "react";
+import { FC, memo, useMemo } from "react";
 import Flex from "../../../components/Flex";
 
 interface Props {
-  onClick: (value: string | number | boolean | string[] | null) => void;
+  onFilterChange: (
+    name: string
+  ) => (value: string | number | boolean | string[] | null) => void;
   checked: boolean;
 }
 
-const TransferInput: FC<Props> = ({ onClick, checked }) => {
+const TransferInput: FC<Props> = memo(({ onFilterChange, checked }) => {
+  const onChange = useMemo(() => onFilterChange("transfer"), [onFilterChange]);
   return (
     <Flex>
       <input
-        onClick={() => onClick(!checked)}
+        onChange={() => onChange(!checked)}
         type="checkbox"
         checked={checked}
       />
       <label>С пересадками</label>
     </Flex>
   );
-};
+});
 
 export default TransferInput;

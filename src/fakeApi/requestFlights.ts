@@ -17,7 +17,6 @@ const requestFlights = ({
   carriers_uids,
   limit,
 }: FiltersQuery): Promise<Flight[]> => {
-  console.log("triggered requestFlights");
   return new Promise((resolve) => {
     (async () => {
       const response = await fetch("./../assets/flights.json");
