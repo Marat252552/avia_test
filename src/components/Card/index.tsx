@@ -2,7 +2,6 @@ import { FC } from "react";
 import Flight from "../../types/flight";
 import CardHeader from "./elements/CardHeader";
 import Segment from "./elements/Segment";
-import { CardLayout } from "./styles";
 import Button from "../Button";
 import Flex from "../Flex";
 
@@ -13,7 +12,7 @@ interface CardProps {
 const Card: FC<CardProps> = ({ flight }) => {
   const segments = flight.flight.legs[0].segments;
   return (
-    <Flex direction="column" gap="10px">
+    <Flex fullwidth direction="column" gap="10px">
       <CardHeader
         airline={flight.flight.carrier.caption}
         price={flight.flight.price.total.amount}

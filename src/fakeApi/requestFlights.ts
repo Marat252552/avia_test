@@ -41,7 +41,9 @@ const requestFlights = ({
           if (carriers_uids.length === 0) return flight;
           return carriers_uids.find((uid) => uid === flight.flight.carrier.uid);
         });
-      resolve(result.slice(0, limit));
+      setTimeout(() => {
+        resolve(result.slice(0, limit));
+      }, 1000);
     })();
   });
 };

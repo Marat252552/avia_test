@@ -1,4 +1,5 @@
 import { FC, memo, useMemo } from "react";
+import Text from "../../../components/Text";
 
 interface Props {
   onFilterChange: (
@@ -13,8 +14,12 @@ const PriceSorter: FC<Props> = memo(({ onFilterChange }) => {
   );
   return (
     <select onChange={(e) => onChange(e.target.value)}>
-      <option value="increase">По возрастанию цены</option>
-      <option value="decrease">По убыванию цены</option>
+      <option value="increase">
+        <Text>По возрастанию цены</Text>
+      </option>
+      <option value="decrease">
+        <Text>По убыванию цены</Text>
+      </option>
     </select>
   );
 });

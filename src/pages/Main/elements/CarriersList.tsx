@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Flex from "../../../components/Flex";
 import { Carrier } from "../../../types/flight";
+import Text from "../../../components/Text";
 
 interface Props {
   carriers: Carrier[] | null;
@@ -27,7 +28,9 @@ const CarriersList: FC<Props> = ({ carriers, onChange, carriers_uids }) => {
                 }}
                 type="checkbox"
               />
-              <label>{carrier.caption}</label>
+              <label>
+                <Text>{carrier.caption}</Text>
+              </label>
             </Flex>
           );
         })}

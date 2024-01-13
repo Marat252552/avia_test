@@ -51,7 +51,7 @@ const MainPage = () => {
   );
 
   return (
-    <Flex gap="30px">
+    <Flex fullwidth gap="30px">
       <Flex direction="column" gap="10px">
         <PriceSorter onFilterChange={onFilterChange} />
 
@@ -76,7 +76,6 @@ const MainPage = () => {
           onChange={onFilterChange("carriers_uds")}
         />
       </Flex>
-
       <FlightsList
         flights={flights}
         loading={loading}
